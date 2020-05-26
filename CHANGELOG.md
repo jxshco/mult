@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 26/05/2020
+### Added
+- Added 'name' to the adding message so the user knows what their adding
+
 ## [0.1.0] - 26/05/2020
 ### Added
 - Added ability to create config and add/remove repos from it
