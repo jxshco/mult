@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const packageConfig = require('../utils/package-config/index.ts').default;
 const delayForEffect = require('../utils/delay-for-effect/index.ts').default;
 
-module.exports.default = script => {
+module.exports.default = () => {
   delayForEffect('Verifying Config', spinner => {
     const configExists = fs.existsSync(`./${packageConfig.configFileName}`);
     if (!configExists) {
@@ -13,10 +13,13 @@ module.exports.default = script => {
       const rawConfig = fs.readFileSync(`./${packageConfig.configFileName}`);
       const config = JSON.parse(rawConfig);
       config.repositories.map(repo => {
-        delayForEffect(`Running ${script} for ${repo.name}\n`, spinner2 => {
-          exec(`cd ./${repo.name} && ${script} && cd ../`, (err, stdout, stderr) => {
-            console.log(stdout);
-            spinner2.succeed();
+        delayForEffect(`Setting up ${repo.name}`, spinner2 => {
+          exec(`git clone ${repo.remote} ${repo.name}`, (err, stdout, stderr) => {
+            if (err) {
+              spinner2.fail();
+            } else {
+              spinner2.succeed();
+            }
           });
         });
       });
