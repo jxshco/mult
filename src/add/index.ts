@@ -3,7 +3,7 @@ const packageConfig = require('../utils/package-config/index.ts').default;
 const delayForEffect = require('../utils/delay-for-effect/index.ts').default;
 
 module.exports.default = (name, remote) => {
-  delayForEffect('Adding new Repository', spinner => {
+  delayForEffect(`Adding ${name} to ${packageConfig.configFileName}`, spinner => {
     // TODO: Verify Remote URL
     const configExists = fs.existsSync(`./${packageConfig.configFileName}`);
     if (!configExists) {
