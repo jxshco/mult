@@ -14,13 +14,17 @@ module.exports.default = () => {
       const config = JSON.parse(rawConfig);
       config.repositories.map(repo => {
         delayForEffect(`Setting up ${repo.name}`, spinner2 => {
-          exec(`git clone ${repo.remote} ${repo.name}`, (err, stdout, stderr) => {
-            if (err) {
-              spinner2.fail();
-            } else {
-              spinner2.succeed();
-            }
-          });
+          if (fs.existsSync(`./${repo.name}`)) {
+            spinner2.info(`Skipped setting up ${repo.name} as it is already setup`);
+          } else {
+            exec(`git clone ${repo.remote} ${repo.name}`, (err, stdout, stderr) => {
+              if (err) {
+                spinner2.fail();
+              } else {
+                spinner2.succeed();
+              }
+            });
+          }
         });
       });
     }

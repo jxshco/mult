@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 29/05/2020
+### Added:
+- Added Ability to run setup multiple times and not cause issues by skipping folders if they are already setup
+
 ## [1.0.0] - 29/05/2020
 ### Changed:
 - Initial Release
